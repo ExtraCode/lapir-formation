@@ -1,0 +1,9 @@
+@use "../variables";
+
+.bg {
+
+    &--primary {
+        background-color: variables.$primary-color
+    }
+
+}

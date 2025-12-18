@@ -1,0 +1,24 @@
+{% set fullStars = note | round(0, 'floor') %}
+
+{# Les étoiles pleines #}
+{% for i in 1..fullStars %}
+    <span class="fas fa-star star-primary-color"></span>
+{% endfor %}
+
+{# Les demis étoiles #}
+{% if note != fullStars %}
+
+    {% if (note - fullStars) == 0.5 %}
+        <span class="fas fa-star-half-alt star-primary-color"></span>
+    {% endif %}
+
+    {% if (note - fullStars) > 0.5 %}
+        <span class="fas fa-star star-primary-color"></span>
+    {% endif %}
+
+{% endif %}
+
+{# Les étoiles vides #}
+{% for i in range(1, (5 - note) | round(0, 'floor')) %}
+    <span class="far fa-star star-primary-color"></span>
+{% endfor %}

@@ -1,0 +1,244 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ formation.titre }} - inscription{% endblock %}
+
+{% block body %}
+
+    <div class="page-title-section section">
+
+        <div class="container text-center">
+            <h1 class="title">{{ formation.titre }}</h1>
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        {# Choix formation : standard ou sur mesure #}
+        <div class="text-center">
+
+            <div class="btn-radio-container">
+                <input type="radio" id="formation_standard" name="formation_type"
+                       onclick="showAndHideElements('formation-standard','formation-sur-mesure')" checked>
+                <label class="btn-radio btn-radio--primary" for="formation_standard">Formation standard</label>
+            </div>
+
+            <div class="btn-radio-container btn-radio-container--primary">
+                <input type="radio" id="formation_sur_mesure" name="formation_type"
+                       onclick="showAndHideElements('formation-sur-mesure','formation-standard')">
+                <label class="btn-radio btn-radio--primary" for="formation_sur_mesure">Formation sur mesure</label>
+            </div>
+
+        </div>
+        {# Fin choix formation #}
+
+        {# ----- FORMATION STANDARD ----- #}
+        <div class="formation-standard mt-4">
+            <p>Durée : {{ formation.nbJour }} jours.<br>
+                Lieu : distanciel (pour une formation dans nos locaux ou dans les vôtres, choisissez une formation sur
+                mesure).<br>
+                Tarif : {{ formation.prixInter }}€ HT par participant.</p>
+
+            <label>
+                <input type="radio" name="inscription_mode"
+                       onclick="showAndHideElements('formation-standard__formulaire','formation-standard__telechargement')"
+                       checked>
+                J'inscris mes collaborateurs par formulaire.
+            </label><br>
+
+            <label>
+                <input type="radio" name="inscription_mode"
+                       onclick="showAndHideElements('formation-standard__telechargement','formation-standard__formulaire')">
+                J'inscris mes collaborateurs via un document à télécharger.
+            </label>
+
+
+            <div class="formation-standard__formulaire mt-4">
+
+                <h4 class="checkout-title">Vos coordonnées</h4>
+
+                <form method="post" action="">
+                    <div class="row mt-3">
+
+                        <div class="col-md-6 col-12 mb-20">
+                            <label>Votre nom/prénom *</label>
+                            <input type="text" name="nom" placeholder="Nom/prénom" required>
+                        </div>
+
+                        <div class="col-md-6 col-12 mb-20">
+                            <label>Votre adresse email*</label>
+                            <input type="email" name="email" placeholder="Adresse email" required>
+                        </div>
+
+                        <div class="col-md-6 col-12 mb-20">
+                            <label>Téléphone (recommandé)</label>
+                            <input type="text" name="telephone" placeholder="Téléphone">
+                        </div>
+                        <div class="col-12 my-3">
+                            Vous êtes :
+                            <input class="ms-2" type="radio" name="inscription_type"
+                                   onclick="showAndHideElements('entreprise')"
+                                   checked>
+                            Une entreprise
+
+                            <input class="ms-3" type="radio" name="inscription_type"
+                                   onclick="showAndHideElements(null,'entreprise')">
+                            Un particulier
+
+                        </div>
+
+                        <h6 class="entreprise">Votre entreprise</h6>
+
+                        <div class="col-md-6 col-12 mb-20 entreprise">
+                            <label>Nom de l'entreprise *</label>
+                            <input type="text" placeholder="Nom de l'entreprise" name="nom_entreprise" required>
+                        </div>
+
+                        <div class="col-md-6 col-12 mb-20 entreprise">
+                            <label>Adresse de l'entreprise *</label>
+                            <input type="text" placeholder="Adresse" name="adresse_entreprise" required>
+                        </div>
+
+
+                        <div class="col-md-6 col-12 mb-20">
+                            <label>Code postal *</label>
+                            <input type="text" placeholder="Code postal de l'entreprise"
+                                   name="code_postal_entreprise"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6 col-12 mb-20">
+                            <label>Ville *</label>
+                            <input type="text" placeholder="Ville de l'entreprise" name="ville_entreprise" required>
+                        </div>
+
+                        <div class="col-md-6 col-12 mb-20">
+                            <label>Êtes vous pris en charge par un OPCO (si oui, lequel) *</label>
+                            <input type="text" placeholder="Laissez vide si vous ne savez pas" name="financement">
+                        </div>
+
+                        <div class="col-md-6 col-12 mb-20">
+                            <label>Nombre de participants que vous inscrivez</label>
+                            <input type="text" placeholder="Laissez vide si vous ne savez pas"
+                                   name="nb_participants">
+                        </div>
+
+                        <div class="col-12 mb-20">
+                            <label>Commentaires</label>
+                            <textarea name="commentaires"></textarea>
+                        </div>
+
+                        <p>Mettre un captcha ici</p>
+
+                        <button type="submit" class="btn btn-primary btn-hover-secondary">
+                            Envoyer l'inscription
+                        </button>
+
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="formation-standard__telechargement d-none mt-4">
+                Y a plus qu'à le faire.
+            </div>
+
+        </div>
+        {# ----- FIN FORMATION STANDARD ----- #}
+
+        {# ----- FORMATION SUR MESURE ----- #}
+        <div class="formation-sur-mesure d-none">
+
+            <h4 class="checkout-title mt-4">Vos coordonnées</h4>
+
+            <form method="post" action="">
+                <div class="row mt-3">
+
+                    <div class="col-md-6 col-12 mb-20">
+                        <label>Votre nom/prénom *</label>
+                        <input type="text" name="nom" placeholder="Nom/prénom" required>
+                    </div>
+
+                    <div class="col-md-6 col-12 mb-20">
+                        <label>Votre adresse email*</label>
+                        <input type="email" name="email" placeholder="Adresse email" required>
+                    </div>
+
+                    <div class="col-md-6 col-12 mb-20">
+                        <label>Téléphone (recommandé)</label>
+                        <input type="text" name="telephone" placeholder="Téléphone">
+                    </div>
+
+                    <h6>Votre entreprise</h6>
+
+                    <div class="col-md-6 col-12 mb-20">
+                        <label>Nom de l'entreprise *</label>
+                        <input type="text" placeholder="Nom de l'entreprise" name="nom_entreprise" required>
+                    </div>
+
+                    <div class="col-md-6 col-12 mb-20">
+                        <label>Adresse de l'entreprise *</label>
+                        <input type="text" placeholder="Adresse" name="adresse_entreprise" required>
+                    </div>
+
+
+                    <div class="col-md-6 col-12 mb-20">
+                        <label>Code postal *</label>
+                        <input type="text" placeholder="Code postal de l'entreprise"
+                               name="code_postal_entreprise"
+                               required>
+                    </div>
+
+                    <div class="col-md-6 col-12 mb-20">
+                        <label>Ville *</label>
+                        <input type="text" placeholder="Ville de l'entreprise" name="ville_entreprise" required>
+                    </div>
+
+                    <div class="col-md-6 col-12 mb-20">
+                        <label>Êtes vous pris en charge par un OPCO (si oui, lequel) *</label>
+                        <input type="text" placeholder="Laissez vide si vous ne savez pas" name="financement">
+                    </div>
+
+                    <h6>Votre besoin, sur mesure</h6>
+
+                    <div class="col-md-6 col-12 mb-20">
+                        <label>Nombre de participants que vous inscrivez</label>
+                        <input type="text" placeholder="Laissez vide si vous ne savez pas"
+                               name="nb_participants">
+                    </div>
+
+                    <div class="col-md-6 col-12 mb-20">
+                        <label>Période ou dates souhaitées *</label>
+                        <input type="text" placeholder="Quand souhaitez-vous réaliser la formation ?"
+                               name="periode_souhaitee" required>
+                    </div>
+
+                    <div class="col-md-6 col-12 mb-20">
+                        <label>Lieu de la formation *</label>
+                        <input type="text" placeholder="Dans nos locaux, dans vos locaux, à distance ?"
+                               name="lieu_formation" required>
+                    </div>
+
+                    <div class="col-12 mb-20">
+                        <label>Description de votre besoin *</label>
+                        <textarea name="description_besoin"
+                                  placeholder="Pourquoi souhaitez-vous réaliser cette formation ? Pour quels collaborateurs ? Quels sont vos objectifs ? etc"
+                                  required>
+                        </textarea>
+                    </div>
+
+                    <p>Mettre un captcha ici</p>
+
+                    <button type="submit" class="btn btn-primary btn-hover-secondary">
+                        Envoyer l'inscription
+                    </button>
+
+                </div>
+            </form>
+
+        </div>
+        {# ----- FIN FORMATION SUR MESURE ----- #}
+
+    </div>
+
+{% endblock %}

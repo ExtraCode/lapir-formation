@@ -1,0 +1,90 @@
+@use "variables" as *;
+@use "classes/colors";
+
+/* ---------------------------------
+CUSTOM
+--------------------------------- */
+h1 {
+    font-size: 40px;
+    line-height: 1.17;
+    color: #3F3A64;
+}
+
+.btn {
+    &-v-sm {
+        height: 35px;
+        padding: 5px 5px;
+    }
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.star-primary-color {
+    color: #f6b500;
+}
+
+.nice-ul-box {
+
+    list-style: none;
+    padding-left: 0;
+
+    & > li {
+        border: 1px solid #dedede;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-top: 30px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}
+
+// Style pour le conteneur du bouton radio
+.btn-radio-container {
+    display: inline-block;
+
+    input[type="radio"] {
+        display: none;
+
+        &:checked, &:hover {
+
+            & + .btn-radio {
+
+                &--primary {
+                    background-color: $primary-color;
+                    color: #fff;
+                }
+
+            }
+        }
+
+    }
+
+    .btn-radio {
+
+        cursor: pointer;
+        padding: 10px 20px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+
+        &--primary {
+            border: 1px solid $primary-color;
+        }
+
+    }
+
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Menu */
+.site-main-menu {
+    & a.active {
+        color: #20AD96;
+    }
+}

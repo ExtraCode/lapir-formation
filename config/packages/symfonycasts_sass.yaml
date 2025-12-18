@@ -1,0 +1,7 @@
+symfonycasts_sass:
+    root_sass:
+        - 'assets/styles/app.scss'
+        - 'assets/styles/pages/accueil.scss'
+        - 'assets/styles/pages/formation.scss'
+        #Admin
+        - 'assets/styles/admin/app_admin.scss'

@@ -1,0 +1,230 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ APP_NOM_OF }} - organisme de formation spécialisé dans l'informatique{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/pages/accueil.scss') }}">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/carte_salles.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+    {# Introduction #}
+    <section class="intro2-section section">
+
+        <div class="container">
+            <div class="row row-cols-lg-2 row-cols-1 max-mb-n30">
+
+                <div class="col align-self-center max-mb-30" data-aos="fade-up">
+                    <div class="intro2-content text-center text-md-start">
+                        <h1 class="title">Formations en informatique</h1>
+                        <div class="desc">
+                            <p>Organisme de formation dans l'informatique basé à Bordeaux, <u>implanté</u> dans le sud
+                                ouest.
+                                <br><u>Dédié</u> à la formation <b>en informatique</b> pour les professionnels.
+                            </p>
+                        </div>
+
+                        {# Barre de recherche #}
+                        <div class="header-search-form mt-3">
+                            <form action="#">
+                                <label class="w-100">
+                                    <input type="text" placeholder="Nom de formation, mots clés, ...">
+                                </label>
+                                <button><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+
+                        {# Vous avez des questions ? #}
+                        <a class="link link-lg" href="{{ path('app_contact') }}"> Vous avez des questions ?
+                            <mark>Contactez nous <i class="fas fa-arrow-right"></i></mark>
+                        </a>
+                    </div>
+                </div>
+
+                {# Photo animée #}
+                <div class="col max-mb-30" data-aos="fade-up">
+                    <div class="contact-image intro2-image">
+                        <img src="{{ asset('images/mathieu.png') }}" width="78%" alt="tete de con">
+
+                        <div class="shape shape-1 scene">
+                                <span data-depth="3">
+                                    <img src="{{ asset('images/shape-animation/about-shape-1.png') }}" alt="forme">
+                                </span>
+                        </div>
+                        <div class="shape shape-2 scene">
+                            <span data-depth="-3"><img src="{{ asset('images/shape-animation/about-shape-1.png') }}"
+                                                       alt="forme"></span>
+                        </div>
+                        <div class="shape shape-3 scene">
+                            <span data-depth="4">shape 3</span>
+                        </div>
+                        <div class="shape shape-4 scene">
+                            <span data-depth="4"><img src="{{ asset('images/shape-animation/shape-1.png') }}"
+                                                      alt="forme"></span>
+                        </div>
+                        <div class="shape shape-5 scene">
+                            <span data-depth="4"><img src="{{ asset('images/shape-animation/newsletter-shape-2.png') }}"
+                                                      alt="forme"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    {# Formations au top #}
+    <section class="section section-padding" data-bg-color="#f5f7fa">
+        <div class="container">
+
+            <div class="section-title text-center" data-aos="fade-up">
+                <span class="sub-title">Restez un collaborateur à jour !</span>
+                <h2 class="title">Les formations qui cartonnent en ce moment</h2>
+            </div>
+
+            {# Liste des formations #}
+            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 max-mb-n30">
+
+                {% for formation in formations %}
+
+                    <!-- Formation Start -->
+                    <div class="col max-mb-30 aos-init aos-animate" data-aos="fade-up">
+                        <div class="course-2">
+                            <div class="thumbnail">
+                                <a href="{{ path('app_formation_voir', {'slug': formation.slug}) }}" class="image"><img
+                                        src="{{ asset('images/formations/course-6.jpg') }}" alt="Course Image"></a>
+                            </div>
+                            <div class="info">
+                                <span class="price"
+                                      style="background-color: {{ formation.thematique.domaine.couleur }};">{{ formation.nbJour }} jr{{ formation.nbJour == 1 ? '' : 's' }}</span>
+
+                                <h3 class="title">
+                                    <a href="{{ path('app_formation_voir', {'slug': formation.slug}) }}">{{ formation.titre }}</a>
+                                </h3>
+
+                                <span class="littleOne">{{ formation.prixInter }}€ HT</span>
+                                <p>
+                                    <small>{{ formation.nbApprenant }} <i class="fa-solid fa-person"></i> formées en
+                                        {% if "now"|date("Y-m-d") > "now"|date("Y") ~ "-06-30" %}
+                                            {{ "now"|date("Y") }}
+                                        {% else %}
+                                            {{ "now"|date_modify("-1 year")|date("Y") }}
+                                        {% endif %}
+
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+            {# Bouton pour toutes les formations #}
+            <div class="row max-mt-50">
+                <div class="col text-center">
+                    <a href="{{ path('app_formation') }}" class="btn btn-primary btn-hover-secondary"> Toutes les
+                        formations
+                        <i class="fas fa-arrow-right ms-3"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    {# Salles de formations #}
+    <section class="learners-section section section-padding">
+        <div class="container">
+
+            <div class="section-title text-center aos-init aos-animate" data-aos="fade-up">
+                <h2 class="title">Nos salles de formation</h2>
+                <span class="sub-title">Pas présent dans votre ville ? Contactez nous pour en parler.</span>
+            </div>
+
+
+            {# La map #}
+            <div class="row">
+
+                <div class="col-6 text-center salles__carte">
+                    <img src="{{ asset('images/carte_france_region.png') }}" class="salles__carte__img"
+                         alt="salles en région">
+                    <i class="fa-solid fa-map-pin salles__carte__pin salles__carte__pin--bordeaux active"></i>
+                    <i class="fa-solid fa-map-pin salles__carte__pin salles__carte__pin--toulouse"></i>
+                    <i class="fa-solid fa-map-pin salles__carte__pin salles__carte__pin--paris"></i>
+                </div>
+
+                <div class="col-6 ps-4">
+
+                    {# Bordeaux #}
+                    <div class="salles__informations bordeaux active">
+                        <h3 class="salles__informations__titre">Bordeaux</h3>
+                        <p class="salles__informations__texte">
+                            Situé dans la zone économique de Mérignac, à proximité de l'aéroport et de la gare, notre
+                            centre de formation est pensé pour assurer un accueil optimal.
+                        </p>
+                        <p class="salles__informations__texte">
+                            Tous nos espaces sont adaptés à de petits groupes comme des plus larges allant jusqu'à 25
+                            collaborateurs.
+                        </p>
+                        <p class="salles__informations__texte">
+                            6 salles de formations équipées, une salle de pause (frigo, micro-onde) pour déjeuner sur
+                            place.
+                        </p>
+                        <a href="{{ path('app_formation') }}" class="btn btn-primary btn-hover-secondary">
+                            Voir les formations</a>
+                    </div>
+
+                    {# Paris #}
+                    <div class="salles__informations paris">
+                        <h3 class="salles__informations__titre">Paris</h3>
+                        <p class="salles__informations__texte">À quelques pas du Palais Garnier, nos 4 salles de
+                            formations sont équipées de tout le matériel nécessaire à la parfaite réalisation de votre
+                            formation.
+                        </p>
+                        <p class="salles__informations__texte">
+                            Tous nos espaces sont adaptés à de petits groupes comme des plus larges allant jusqu'à 25
+                            collaborateurs.
+                        </p>
+                        <p class="salles__informations__texte">
+                            3 salles de formations équipées, une salle de pause (frigo, micro-onde) pour déjeuner sur
+                            place.
+                        </p>
+                        <a href="{{ path('app_formation') }}" class="btn btn-primary btn-hover-secondary btn-sm"> Voir
+                            les formations</a>
+                    </div>
+
+                    {# Toulouse #}
+                    <div class="salles__informations toulouse">
+                        <h3 class="salles__informations__titre">Toulouse</h3>
+                        <p class="salles__informations__texte">
+                            Implanté proche de la gare, notre centre de Toulouse permet d'accueil vos équipes en toute
+                            convivialité.
+                        </p>
+                        <p class="salles__informations__texte">
+                            Tous nos espaces sont adaptés à de petits groupes comme des plus larges allant jusqu'à 25
+                            collaborateurs.
+                        </p>
+                        <p class="salles__informations__texte">
+                            4 salles de formations équipées, une salle de pause (frigo, micro-onde) pour déjeuner sur
+                            place.
+                        </p>
+                        <a href="{{ path('app_formation') }}" class="btn btn-primary btn-hover-secondary btn-sm"> Voir
+                            les formations</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

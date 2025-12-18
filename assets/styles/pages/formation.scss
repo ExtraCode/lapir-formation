@@ -1,0 +1,19 @@
+/* ---------------------------------
+VOIR FORMATION
+--------------------------------- */
+.course-details-wrapper {
+  & .title {
+    font-size: 20px;
+  }
+}
+
+.resume {
+  &__bloc {
+    width: 49%;
+    margin: 0;
+
+    &__titre {
+      padding: 10px;
+    }
+  }
+}

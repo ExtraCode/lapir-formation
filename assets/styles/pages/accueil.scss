@@ -1,0 +1,86 @@
+/* ---------------------------------
+CARTE FRANCE
+--------------------------------- */
+
+.salles {
+  &__carte {
+
+    background-color: #3f3a64;
+    padding: 20px 0;
+    border-radius: 20px;
+
+    &__pin {
+      position: absolute;
+      font-size: 35px;
+      color: #3f3a64;
+      cursor: pointer;
+
+      &.active {
+        transform: scale(1.5);
+        color: #20AD96;
+      }
+
+      &--nantes {
+        top: 36%;
+        left: 26%;
+      }
+
+      &--bordeaux {
+        top: 57%;
+        left: 33%;
+      }
+
+      &--toulouse {
+        top: 70%;
+        left: 46%;
+      }
+
+      &--marseille {
+        top: 73%;
+        left: 71%;
+      }
+
+      &--lyon {
+        top: 49%;
+        left: 66%;
+      }
+
+      &--dijon {
+        top: 35%;
+        left: 69%;
+      }
+
+      &--paris {
+        top: 21%;
+        left: 53%;
+      }
+
+      &--lille {
+        top: 7%;
+        left: 56%;
+      }
+
+      &--dax{
+        top: 77%;
+        left: 33%;
+      }
+    }
+
+    &__img {
+      width: 80%;
+    }
+  }
+
+  &__informations {
+
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+    &__texte {
+      font-size: 1.25rem !important;
+    }
+  }
+}
