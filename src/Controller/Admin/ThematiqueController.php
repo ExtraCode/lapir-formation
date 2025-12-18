@@ -2,12 +2,8 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\DomaineFormation;
 use App\Entity\ThematiqueFormation;
-use App\Form\DomaineFormationType;
 use App\Form\ThematiqueFormationType;
-use App\Repository\DomaineFormationRepository;
-use App\Repository\FormationRepository;
 use App\Repository\ThematiqueFormationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -77,7 +73,7 @@ class ThematiqueController extends AbstractController
         $entityManager->remove($thematique);
         $entityManager->flush();
 
-        $this->addFlash('success', "Le thématique de formation a bien été supprimé.");
+        $this->addFlash('success', "Le thématique de formation a bien été supprimée.");
 
         return $this->redirectToRoute('app_admin_thematique', [], Response::HTTP_SEE_OTHER);
     }

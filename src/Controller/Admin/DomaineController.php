@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Entity\DomaineFormation;
 use App\Form\DomaineFormationType;
 use App\Repository\DomaineFormationRepository;
-use App\Repository\FormationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
