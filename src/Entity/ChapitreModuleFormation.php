@@ -19,7 +19,7 @@ class ChapitreModuleFormation
     private ?ModuleFormation $moduleFormation = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $titre = null;
+    private ?string $nom = null;
 
     #[ORM\Column]
     private ?int $ordre = null;
@@ -41,14 +41,14 @@ class ChapitreModuleFormation
         return $this;
     }
 
-    public function getTitre(): ?string
+    public function getNom(): ?string
     {
-        return $this->titre;
+        return $this->nom;
     }
 
-    public function setTitre(string $titre): static
+    public function setNom(string $nom): static
     {
-        $this->titre = $titre;
+        $this->nom = $nom;
 
         return $this;
     }

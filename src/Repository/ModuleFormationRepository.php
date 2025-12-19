@@ -21,28 +21,16 @@ class ModuleFormationRepository extends ServiceEntityRepository
         parent::__construct($registry, ModuleFormation::class);
     }
 
-//    /**
-//     * @return ModuleFormation[] Returns an array of ModuleFormation objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('m.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?ModuleFormation
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /*
+     * Retourne les modules de formation triés par formation et par ordre
+     */
+    public function findAllOrderByFormationAndOrdre()
+    {
+        return $this->createQueryBuilder('m')
+            ->join('m.formation', 'f')
+            ->orderBy('f.nom', 'ASC')
+            ->addOrderBy('m.ordre', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

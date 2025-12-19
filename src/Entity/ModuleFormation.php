@@ -21,12 +21,12 @@ class ModuleFormation
     private ?Formation $formation = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $titre = null;
+    private ?string $nom = null;
 
     #[ORM\Column]
     private ?int $ordre = null;
 
-    #[ORM\OneToMany(mappedBy: 'moduleFormation', targetEntity: ChapitreModuleFormation::class, orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: ChapitreModuleFormation::class, mappedBy: 'moduleFormation', orphanRemoval: true)]
     private Collection $chapitreModuleFormations;
 
     public function __construct()
@@ -59,14 +59,14 @@ class ModuleFormation
         return $this;
     }
 
-    public function getTitre(): ?string
+    public function getNom(): ?string
     {
-        return $this->titre;
+        return $this->nom;
     }
 
-    public function setTitre(string $titre): static
+    public function setNom(string $nom): static
     {
-        $this->titre = $titre;
+        $this->nom = $nom;
 
         return $this;
     }

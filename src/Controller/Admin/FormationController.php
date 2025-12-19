@@ -3,9 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Formation;
-use App\Entity\ThematiqueFormation;
 use App\Form\FormationType;
-use App\Form\ThematiqueFormationType;
 use App\Repository\FormationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +19,7 @@ class FormationController extends AbstractController
     {
 
         return $this->render('admin/formation/index.html.twig', [
-            'formations' => $formationRepository->findBy([], ['titre' => 'ASC']),
+            'formations' => $formationRepository->findBy([], ['nom' => 'ASC']),
         ]);
 
     }
@@ -69,7 +67,7 @@ class FormationController extends AbstractController
         ]);
     }
 
-    #[Route('supprimer/{id}', name: '_supprimer')]
+    #[Route('/supprimer/{id}', name: '_supprimer')]
     public function delete(Formation $formation, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($formation);

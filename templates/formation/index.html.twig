@@ -39,10 +39,10 @@
 
                                 {% if thematiqueFormation.formations is not empty %}
                                     <li><a {{ loop.parent.loop.first and loop.first ? 'class="active"' : '' }}
-                                                data-bs-toggle="tab"
-                                                href="#{{ thematiqueFormation.slug }}"
-                                                aria-selected="true"
-                                                role="tab">
+                                            data-bs-toggle="tab"
+                                            href="#{{ thematiqueFormation.slug }}"
+                                            aria-selected="true"
+                                            role="tab">
                                             {{ thematiqueFormation.nom }}
                                         </a>
                                     </li>
@@ -76,7 +76,7 @@
 
                                                 <tr>
                                                     <td>
-                                                        <a href="{{ path('app_formation_voir', {'slug': formation.slug}) }}">{{ formation.titre }}</a>
+                                                        <a href="{{ path('app_formation_voir', {'slug': formation.slug}) }}">{{ formation.nom }}</a>
                                                     </td>
                                                     <td>
                                                         {{ formation.nbJour }}

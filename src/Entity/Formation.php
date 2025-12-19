@@ -17,14 +17,10 @@ class Formation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'formations')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?ThematiqueFormation $thematique = null;
-
     #[ORM\Column(length: 255)]
-    private ?string $titre = null;
+    private ?string $nom = null;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 10, unique: true)]
     private ?string $reference = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -39,7 +35,7 @@ class Formation
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?bool $eligibleCpf = false;
+    private ?bool $eligibleCpf = null;
 
     #[ORM\OneToMany(mappedBy: 'formation', targetEntity: AvisFormation::class, orphanRemoval: true)]
     private Collection $avisFormations;
@@ -69,13 +65,19 @@ class Formation
     private ?int $nbApprenant = null;
 
     #[ORM\Column]
-    private ?bool $auTop = false;
+    private ?bool $auTop = null;
 
     #[ORM\Column]
     private ?float $nbJour = null;
 
     #[ORM\Column(length: 100, unique: true)]
     private ?string $slug = null;
+
+    /**
+     * @var Collection<int, ThematiqueFormation>
+     */
+    #[ORM\ManyToMany(targetEntity: ThematiqueFormation::class, inversedBy: 'formations')]
+    private Collection $Thematique;
 
     public function __construct()
     {
@@ -85,6 +87,9 @@ class Formation
         $this->prerequisFormations = new ArrayCollection();
         $this->moduleFormations = new ArrayCollection();
         $this->inscriptionInterFormations = new ArrayCollection();
+        $this->eligibleCpf = false;
+        $this->auTop = false;
+        $this->Thematique = new ArrayCollection();
     }
 
     // Retourne les modules d'une formation triés selon le champ de l'entité choisi
@@ -138,26 +143,14 @@ class Formation
         return $this->id;
     }
 
-    public function getThematique(): ?ThematiqueFormation
+    public function getNom(): ?string
     {
-        return $this->thematique;
+        return $this->nom;
     }
 
-    public function setThematique(?ThematiqueFormation $thematique): static
+    public function setNom(string $nom): static
     {
-        $this->thematique = $thematique;
-
-        return $this;
-    }
-
-    public function getTitre(): ?string
-    {
-        return $this->titre;
-    }
-
-    public function setTitre(string $titre): static
-    {
-        $this->titre = $titre;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -471,6 +464,30 @@ class Formation
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ThematiqueFormation>
+     */
+    public function getThematique(): Collection
+    {
+        return $this->Thematique;
+    }
+
+    public function addThematique(ThematiqueFormation $thematique): static
+    {
+        if (!$this->Thematique->contains($thematique)) {
+            $this->Thematique->add($thematique);
+        }
+
+        return $this;
+    }
+
+    public function removeThematique(ThematiqueFormation $thematique): static
+    {
+        $this->Thematique->removeElement($thematique);
 
         return $this;
     }

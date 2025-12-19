@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ formation.titre }}{% endblock %}
+{% block title %}{{ nom }}{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -12,7 +12,7 @@
 <div class="page-title-section section">
 
     <div class="container text-center">
-        <h1 class="title">{{ formation.titre }}</h1>
+        <h1 class="title">{{ nom }}</h1>
     </div>
 
 </div>
@@ -51,7 +51,7 @@
                                         <div class="section-header">
                                             <div class="section-left">
 
-                                                <h5 class="title">{{ loop.index ~ " - " ~ moduleFormation.titre }}</h5>
+                                                <h5 class="title">{{ loop.index ~ " - " ~ modulenom }}</h5>
 
                                             </div>
                                         </div>
@@ -62,7 +62,7 @@
                                                 <li class="course-item">
                                                             <span class="section-item-link lesson">
                                                                 <span
-                                                                    class="item-name">{{ chapitreModuleFormation.titre }}</span>
+                                                                    class="item-name">{{ chapitreModule.nom }}</span>
                                                             </span>
                                                 </li>
                                             {% endfor %}
@@ -93,7 +93,7 @@
                                         {% for publicFormation in formation.publicFormationTries %}
                                             <li class="course-item">
                                                     <span class="resume__bloc__item section-item-link">
-                                                        <span class="item-name">{{ publicFormation.titre }}</span>
+                                                        <span class="item-name">{{ publicnom }}</span>
                                                     </span>
                                             </li>
                                         {% endfor %}
@@ -112,7 +112,7 @@
                                         {% for prerequisFormation in formation.prerequisFormationTries %}
                                             <li class="course-item">
                                                     <span class="resume__bloc__item section-item-link">
-                                                        <span class="item-name">{{ prerequisFormation.titre }}</span>
+                                                        <span class="item-name">{{ prerequisnom }}</span>
                                                     </span>
                                             </li>
                                         {% endfor %}

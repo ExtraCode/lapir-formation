@@ -6,4 +6,16 @@
         background-color: variables.$primary-color
     }
 
+    &--secondary {
+        background-color: variables.$secondary-color;
+    }
+
+    &--tertiary {
+        background-color: variables.$tertiary-color;
+    }
+
+    &--quaternary {
+        background-color: variables.$quaternary-color;
+    }
+
 }

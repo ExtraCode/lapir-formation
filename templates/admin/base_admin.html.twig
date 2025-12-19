@@ -60,6 +60,27 @@
                 </a>
             </li>
 
+            <li>
+                <a href="{{ path('app_admin_formation') }}"
+                   class="nav-link {{ app.request.attributes.get('_route') matches '/^app_admin_formation/' ? 'active' : '' }}">
+                    <i class="fa-solid fa-hand-holding-medical"></i> Formations
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ path('app_admin_module') }}"
+                   class="nav-link {{ app.request.attributes.get('_route') matches '/^app_admin_module/' ? 'active' : '' }}">
+                    <i class="fa-solid fa-hand-holding-medical"></i> Modules
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ path('app_admin_chapitre') }}"
+                   class="nav-link {{ app.request.attributes.get('_route') matches '/^app_admin_chapitre/' ? 'active' : '' }}">
+                    <i class="fa-solid fa-hand-holding-medical"></i> Chapitres
+                </a>
+            </li>
+
             <hr>
 
             <li>

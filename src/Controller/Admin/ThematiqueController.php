@@ -67,7 +67,7 @@ class ThematiqueController extends AbstractController
         ]);
     }
 
-    #[Route('supprimer/{id}', name: '_supprimer')]
+    #[Route('/supprimer/{id}', name: '_supprimer')]
     public function delete(ThematiqueFormation $thematique, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($thematique);

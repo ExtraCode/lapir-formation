@@ -21,28 +21,18 @@ class ChapitreModuleFormationRepository extends ServiceEntityRepository
         parent::__construct($registry, ChapitreModuleFormation::class);
     }
 
-//    /**
-//     * @return ModuleChapitreFormation[] Returns an array of ModuleChapitreFormation objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('m.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?ModuleChapitreFormation
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /*
+     * Retourne les chapitres de formation triés par formation, modules et par ordre
+     */
+    public function findAllOrderByFormationAndModuleAndOrdre()
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.moduleFormation', 'm')
+            ->join('m.formation', 'f')
+            ->orderBy('f.nom', 'ASC')
+            ->addOrderBy('m.ordre', 'ASC')
+            ->addOrderBy('c.ordre', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -67,7 +67,7 @@ class DomaineController extends AbstractController
         ]);
     }
 
-    #[Route('supprimer/{id}', name: '_supprimer')]
+    #[Route('/supprimer/{id}', name: '_supprimer')]
     public function delete(DomaineFormation $domaine, EntityManagerInterface $entityManager): Response
     {
         $entityManager->remove($domaine);

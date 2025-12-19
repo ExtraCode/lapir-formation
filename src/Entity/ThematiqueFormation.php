@@ -20,9 +20,6 @@ class ThematiqueFormation
     #[ORM\JoinColumn(nullable: false)]
     private ?DomaineFormation $domaine = null;
 
-    #[ORM\OneToMany(mappedBy: 'thematique', targetEntity: Formation::class)]
-    private Collection $formations;
-
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
@@ -31,6 +28,12 @@ class ThematiqueFormation
 
     #[ORM\Column(length: 20)]
     private ?string $slug = null;
+
+    /**
+     * @var Collection<int, Formation>
+     */
+    #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'Thematique')]
+    private Collection $formations;
 
     public function __construct()
     {
@@ -50,36 +53,6 @@ class ThematiqueFormation
     public function setDomaine(?DomaineFormation $domaine): static
     {
         $this->domaine = $domaine;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Formation>
-     */
-    public function getFormations(): Collection
-    {
-        return $this->formations;
-    }
-
-    public function addFormation(Formation $formation): static
-    {
-        if (!$this->formations->contains($formation)) {
-            $this->formations->add($formation);
-            $formation->setThematique($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFormation(Formation $formation): static
-    {
-        if ($this->formations->removeElement($formation)) {
-            // set the owning side to null (unless already changed)
-            if ($formation->getThematique() === $this) {
-                $formation->setThematique(null);
-            }
-        }
 
         return $this;
     }
@@ -116,6 +89,33 @@ class ThematiqueFormation
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Formation>
+     */
+    public function getFormations(): Collection
+    {
+        return $this->formations;
+    }
+
+    public function addFormation(Formation $formation): static
+    {
+        if (!$this->formations->contains($formation)) {
+            $this->formations->add($formation);
+            $formation->addThematique($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(Formation $formation): static
+    {
+        if ($this->formations->removeElement($formation)) {
+            $formation->removeThematique($this);
+        }
 
         return $this;
     }
